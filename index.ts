@@ -16,11 +16,11 @@ app.get('/', (req: Request, res: Response) => {
 
 // Define the first route of app
 app.get('/hello/:name?', (req: Request, res: Response) => {
-    res.status(200).json({"data": {"message":"Hello " + (req.params.name || 'anonymous')}})
+    res.status(200).json({"data": {"message" : "Hello " + (req.params.name || 'anonymous')}})
 });
 
 app.get('/json', (req: Request, res: Response ) => {
-    res.status(200).json({"data": {"message":"Goodbye, world"}})
+    res.status(200).json({"data": {"message" : "Goodbye, world"}})
 });
 
 // Execute APP and Listen Request
