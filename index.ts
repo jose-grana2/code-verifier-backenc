@@ -1,29 +1,18 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
+import server from './src/server';
+import { LogError, LogSuccess } from './src/utils/logger';
 
-// Configuration the .env file
+//Configuration the .env file 
 dotenv.config();
 
-// Create Express App
-const app : Express = express();
-const port: string | number = process.env.PORT || 8000;
-
-// Define the first route of app
-app.get('/', (req: Request, res: Response) => {
-    // Send Hello World
-    res.send('APP Express + TS + Swagger + Mongoose');
+const port = process.env.PORT || 8000;
+ 
+//Execute server
+server.listen(port, () => {
+    LogSuccess(`[Server ON]: Running in http://localhost:${port}/api`);
 });
 
-// Define the first route of app
-app.get('/hello/:name?', (req: Request, res: Response) => {
-    res.status(200).json({"data": {"message" : "Hello " + (req.params.name || 'anonymous')}})
+//Control Server ERROR
+server.on('error', (error) => {
+    LogError(`[Server ERROR]: ${error}`);
 });
-
-app.get('/json', (req: Request, res: Response ) => {
-    res.status(200).json({"data": {"message" : "Goodbye, world"}})
-});
-
-// Execute APP and Listen Request
-app.listen(port, () => {
-    console.log(`EXPRESS RUNNER: Running at http://localhost:${port}`);
-})

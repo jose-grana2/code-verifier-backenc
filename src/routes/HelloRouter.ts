@@ -1,7 +1,6 @@
 import express, {Request, Response} from "express";
-import { HelloController } from "@/controller/HelloController";
-import { LogInfo } from "@/utils/logger";
-import { BasicResponse } from "@/controller/types";
+import { HelloController } from "../controller/HelloController";
+import { LogInfo } from "../utils/logger";
 
 //Router from express
 let helloRouter = express.Router();
@@ -18,7 +17,6 @@ helloRouter.route('/')
         const response = await controller.getMessage(name)
         //Send to the client the response
         return res.send(response);
-
     });
 
 
